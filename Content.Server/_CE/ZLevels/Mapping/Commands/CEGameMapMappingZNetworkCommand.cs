@@ -7,6 +7,7 @@ using Content.Server._CE.ZLevels.Core;
 using Content.Server._CE.ZLevels.Core.Components;
 using Content.Server.Administration;
 using Content.Server.GameTicking;
+using Content.Server.Maps;
 using Content.Shared.Administration;
 using Content.Shared.Maps;
 using Robust.Server.GameObjects;
@@ -177,7 +178,7 @@ public sealed class CEGameMapMappingZNetworkCommand : LocalizedEntityCommands
 
         //Maps successfully created. run misc helpful mapping commands
         if (player.AttachedEntity is { Valid: true } playerEntity &&
-            (EntityManager.GetComponent<MetaDataComponent>(playerEntity).EntityPrototype is not { } proto || proto != GameTicker.AdminObserverPrototypeName))
+            (EntityManager.GetComponent<MetaDataComponent>(playerEntity).EntityPrototype is not { } proto || proto.ID != GameTicker.AdminObserverPrototypeName))
         {
             shell.ExecuteCommand("aghost");
         }

@@ -3,6 +3,7 @@
  * https://github.com/space-wizards/space-station-14/blob/master/LICENSE.TXT
  */
 
+using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 
 namespace Content.Shared._CE.ZLevels.Damage.FallingDamage;
