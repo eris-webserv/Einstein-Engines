@@ -54,61 +54,62 @@
           collection: MeatLaserImpact
   # Shitmed Change End
 
-- type: entity
-  id: TorsoHarpy
-  name: "harpy torso"
-  parent: PartHarpy
-  components:
-  - type: Sprite
-    netsync: false
-    sprite: Mobs/Species/Harpy/parts.rsi
-    state: "torso_m"
-  - type: Icon
-    sprite: Mobs/Species/Harpy/parts.rsi
-    state: "torso_m"
-  - type: BodyPart
-    partType: Torso
-  # Shitmed Change Start
-    toolName: "a torso"
-    containerName: "torso_slot"
-  - type: ContainerContainer
-    containers:
-      torso_slot: !type:ContainerSlot {}
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Blunt
-        damage: 400
-      behaviors:
-      - !type:GibPartBehavior { }
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Slash
-        damage: 400
-      behaviors:
-      - !type:GibPartBehavior { }
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Heat
-        damage: 400
-      behaviors:
-      - !type:SpawnEntitiesBehavior
-        spawnInContainer: true
-        spawn:
-          Ash:
-            min: 1
-            max: 1
-      - !type:BurnBodyBehavior { }
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MeatLaserImpact
+# EE: Torso's replaced with chests and groins
+# - type: entity
+#   id: TorsoHarpy
+#   name: "harpy torso"
+#   parent: PartHarpy
+#   components:
+#   - type: Sprite
+#     netsync: false
+#     sprite: Mobs/Species/Harpy/parts.rsi
+#     state: "torso_m"
+#   - type: Icon
+#     sprite: Mobs/Species/Harpy/parts.rsi
+#     state: "torso_m"
+#   - type: BodyPart
+#     partType: Torso
+#   # Shitmed Change Start
+#     toolName: "a torso"
+#     containerName: "torso_slot"
+#   - type: ContainerContainer
+#     containers:
+#       torso_slot: !type:ContainerSlot {}
+#   - type: Destructible
+#     thresholds:
+#     - trigger:
+#         !type:DamageTypeTrigger
+#         damageType: Blunt
+#         damage: 400
+#       behaviors:
+#       - !type:GibPartBehavior { }
+#     - trigger:
+#         !type:DamageTypeTrigger
+#         damageType: Slash
+#         damage: 400
+#       behaviors:
+#       - !type:GibPartBehavior { }
+#     - trigger:
+#         !type:DamageTypeTrigger
+#         damageType: Heat
+#         damage: 400
+#       behaviors:
+#       - !type:SpawnEntitiesBehavior
+#         spawnInContainer: true
+#         spawn:
+#           Ash:
+#             min: 1
+#             max: 1
+#       - !type:BurnBodyBehavior { }
+#       - !type:PlaySoundBehavior
+#         sound:
+#           collection: MeatLaserImpact
   # Shitmed Change End
 
 - type: entity
   id: HeadHarpy
   name: "harpy head"
-  parent: PartHarpy
+  parent: [ PartHarpy, BaseHead ]
   components:
   - type: Sprite
     netsync: false
@@ -132,7 +133,7 @@
 - type: entity
   id: LeftArmHarpy
   name: "left harpy arm"
-  parent: PartHarpy
+  parent: [ PartHarpy, BaseLeftArm ]
   components:
   - type: Sprite
     netsync: false
@@ -149,7 +150,7 @@
 - type: entity
   id: RightArmHarpy
   name: "right harpy arm"
-  parent: PartHarpy
+  parent: [ PartHarpy, BaseRightArm ]
   components:
   - type: Sprite
     netsync: false
@@ -172,7 +173,7 @@
 - type: entity
   id: LeftHandHarpy
   name: "left harpy hand"
-  parent: PartHarpy
+  parent: [ PartHarpy, BaseLeftHand ]
   components:
   - type: Sprite
     netsync: false
@@ -189,7 +190,7 @@
 - type: entity
   id: RightHandHarpy
   name: "right harpy hand"
-  parent: PartHarpy
+  parent: [ PartHarpy, BaseRightHand ]
   components:
   - type: Sprite
     netsync: false
@@ -206,7 +207,7 @@
 - type: entity
   id: LeftLegHarpy
   name: "left harpy leg"
-  parent: PartHarpy
+  parent: [ PartHarpy, BaseLeftLeg ]
   components:
   - type: Sprite
     netsync: false
@@ -220,11 +221,12 @@
     symmetry: Left
     toolName: "a left leg" # Shitmed Change
   - type: MovementBodyPart
+    sprintSpeed: 5 # Goobstation
 
 - type: entity
   id: RightLegHarpy
   name: "right harpy leg"
-  parent: PartHarpy
+  parent: [ PartHarpy, BaseRightLeg ]
   components:
   - type: Sprite
     netsync: false
@@ -238,11 +240,12 @@
     symmetry: Right
     toolName: "a right leg" # Shitmed Change
   - type: MovementBodyPart
+    sprintSpeed: 5 # Goobstation
 
 - type: entity
   id: LeftFootHarpy
   name: "left harpy foot"
-  parent: PartHarpy
+  parent: [ PartHarpy, BaseLeftFoot ]
   components:
   - type: Sprite
     netsync: false
@@ -259,7 +262,7 @@
 - type: entity
   id: RightFootHarpy
   name: "right harpy foot"
-  parent: PartHarpy
+  parent: [ PartHarpy, BaseRightFoot ]
   components:
   - type: Sprite
     netsync: false

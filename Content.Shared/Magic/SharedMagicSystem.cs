@@ -1,12 +1,15 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._Goobstation.Religion;
+using Content.Shared._Shitmed.Targeting;
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Coordinates.Helpers;
+using Content.Shared.Damage;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
+using Content.Shared.FixedPoint;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
@@ -61,6 +64,7 @@ public abstract class SharedMagicSystem : EntitySystem
     [Dependency] private readonly LockSystem _lock = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!; // Goobstation
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
@@ -560,7 +564,34 @@ public abstract class SharedMagicSystem : EntitySystem
     // TODO: Temp until chat is in shared
     public void Speak(BaseActionEvent args)
     {
+        // Goob edit start
+        var speech = string.Empty;
+
         if (args is not ISpeakSpell speak || string.IsNullOrWhiteSpace(speak.Speech))
+            return;
+
+        /*if (args is ISpeakSpell speak && !string.IsNullOrWhiteSpace(speak.Speech))
+        {
+            speech = speak?.Speech;
+        }
+
+        if (TryComp(args.Action, out MagicComponent? magic))
+        {
+            var invocationEv = new GetSpellInvocationEvent(magic.School, args.Performer);
+            RaiseLocalEvent(args.Performer, invocationEv);
+            if (invocationEv.Invocation.HasValue)
+                speech = invocationEv.Invocation;
+            if (invocationEv.ToHeal.GetTotal() > FixedPoint2.Zero)
+            {
+                _damageable.TryChangeDamage(args.Performer,
+                    -invocationEv.ToHeal * 11f,
+                    true,
+                    false,
+                    targetPart: TargetBodyPart.All); // Shitmed Change
+            }
+        } // EE: We dont have wiz/heretic/whatever yet */
+
+        if (string.IsNullOrEmpty(speech))
             return;
 
         var ev = new SpeakSpellEvent(args.Performer, speak.Speech, speak.ChatType);

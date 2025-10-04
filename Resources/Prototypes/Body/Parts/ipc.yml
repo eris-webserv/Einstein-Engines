@@ -34,63 +34,64 @@
   - type: StaticPrice
     price: 100
 
-- type: entity
-  id: TorsoIPC
-  name: "ipc torso"
-  parent: PartIPC
-  components:
-  - type: Sprite
-    netsync: false
-    sprite: Mobs/Species/IPC/parts.rsi
-    state: "torso_m"
-  - type: Icon
-    sprite: Mobs/Species/IPC/parts.rsi
-    state: "torso_m"
-  - type: BodyPart
-    partType: Torso
-    children: # I hate this so much I want to kill it AAAAAAAAAAAAAAAAAAAAAAAA
-      head:
-        id: "head"
-        type: Head
-      left arm:
-        id: "left arm"
-        type: Arm
-      right arm:
-        id: "right arm"
-        type: Arm
-      left leg:
-        id: "left leg"
-        type: Leg
-      right leg:
-        id: "right leg"
-        type: Leg
-    organs:
-      posbrain:
-        id: "posbrain"
-      pump:
-        id: "pump"
-  - type: ContainerContainer
-    containers:
-      torso_slot: !type:ContainerSlot {}
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Blunt
-        damage: 400
-      behaviors:
-      - !type:GibPartBehavior { }
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Slash
-        damage: 400
-      behaviors:
-      - !type:GibPartBehavior { }
+    # Woundmed: All torso's are now chest+groin
+# - type: entity
+#   id: TorsoIPC
+#   name: "ipc torso"
+#   parent: PartIPC
+#   components:
+#   - type: Sprite
+#     netsync: false
+#     sprite: Mobs/Species/IPC/parts.rsi
+#     state: "torso_m"
+#   - type: Icon
+#     sprite: Mobs/Species/IPC/parts.rsi
+#     state: "torso_m"
+#   - type: BodyPart
+#     partType: Torso
+#     children: # I hate this so much I want to kill it AAAAAAAAAAAAAAAAAAAAAAAA
+#       head:
+#         id: "head"
+#         type: Head
+#       left arm:
+#         id: "left arm"
+#         type: Arm
+#       right arm:
+#         id: "right arm"
+#         type: Arm
+#       left leg:
+#         id: "left leg"
+#         type: Leg
+#       right leg:
+#         id: "right leg"
+#         type: Leg
+#     organs:
+#       posbrain:
+#         id: "posbrain"
+#       pump:
+#         id: "pump"
+#   - type: ContainerContainer
+#     containers:
+#       torso_slot: !type:ContainerSlot {}
+#   - type: Destructible
+#     thresholds:
+#     - trigger:
+#         !type:DamageTypeTrigger
+#         damageType: Blunt
+#         damage: 400
+#       behaviors:
+#       - !type:GibPartBehavior { }
+#     - trigger:
+#         !type:DamageTypeTrigger
+#         damageType: Slash
+#         damage: 400
+#       behaviors:
+#       - !type:GibPartBehavior { }
 
 - type: entity
   id: HeadIPC
   name: "ipc head"
-  parent: PartIPC
+  parent: [ PartIPC, BaseHead ]
   components:
   - type: Sprite
     netsync: false
@@ -101,7 +102,7 @@
     state: "head_m"
   - type: BodyPart
     partType: Head
-    organs:
+    organs: # posibrain is stored in the torso
       eyes:
         id: "eyes"
     vital: true
@@ -119,7 +120,7 @@
 - type: entity
   id: LeftArmIPC
   name: "left ipc arm"
-  parent: PartIPC
+  parent: [ PartIPC, BaseLeftArm ]
   components:
   - type: Sprite
     netsync: false
@@ -139,7 +140,7 @@
 - type: entity
   id: RightArmIPC
   name: "right ipc arm"
-  parent: PartIPC
+  parent: [ PartIPC, BaseRightArm ]
   components:
   - type: Sprite
     netsync: false
@@ -159,7 +160,7 @@
 - type: entity
   id: LeftHandIPC
   name: "left ipc hand"
-  parent: PartIPC
+  parent: [ PartIPC, BaseLeftHand ]
   components:
   - type: Sprite
     netsync: false
@@ -175,7 +176,7 @@
 - type: entity
   id: RightHandIPC
   name: "right ipc hand"
-  parent: PartIPC
+  parent: [ PartIPC, BaseRightHand ]
   components:
   - type: Sprite
     netsync: false
@@ -191,7 +192,7 @@
 - type: entity
   id: LeftLegIPC
   name: "left ipc leg"
-  parent: PartIPC
+  parent: [ PartIPC, BaseLeftLeg ]
   components:
   - type: Sprite
     netsync: false
@@ -212,7 +213,7 @@
 - type: entity
   id: RightLegIPC
   name: "right ipc leg"
-  parent: PartIPC
+  parent: [ PartIPC, BaseRightLeg ]
   components:
   - type: Sprite
     netsync: false
@@ -233,7 +234,7 @@
 - type: entity
   id: LeftFootIPC
   name: "left ipc foot"
-  parent: PartIPC
+  parent: [ PartIPC, BaseLeftFoot ]
   components:
   - type: Sprite
     netsync: false
@@ -249,7 +250,7 @@
 - type: entity
   id: RightFootIPC
   name: "right ipc foot"
-  parent: PartIPC
+  parent: [ PartIPC, BaseRightFoot ]
   components:
   - type: Sprite
     netsync: false

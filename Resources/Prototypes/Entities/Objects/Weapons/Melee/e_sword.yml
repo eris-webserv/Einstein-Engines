@@ -5,6 +5,12 @@
   components:
   - type: EnergySword
   - type: ItemToggle
+    # Goobstation start
+    soundFailToActivate:
+      path: /Audio/Machines/button.ogg
+      params:
+        variation: 0.250
+    # Goobstation end
     soundActivate:
       path: /Audio/Weapons/ebladeon.ogg
     soundDeactivate:
@@ -19,6 +25,17 @@
       malus: 0.6
     - type: Execution
       doAfterDuration: 4.0
+    - type: Scalpel # Shitmed
+      speed: 0.75
+    - type: Cautery # Shitmed: you have to be very, very careful to cauterize with it
+      speed: 0.2
+    - type: SurgeryTool # Shitmed
+      startSound:
+        path: /Audio/Weapons/ebladehum.ogg
+      endSound:
+        path: /Audio/Weapons/eblade1.ogg
+        params:
+          variation: 0.250
   - type: ItemToggleHot
   - type: ItemToggleSize
     activatedSize: Huge
@@ -41,14 +58,16 @@
       types:
         Slash: 15
         Heat: 15
-        Structural: 45 # its a damn laser sword, let people star wars their way through walls
+        Structural: 20
   - type: MeleeWeapon
+    animationRotation: -45 # WWDP
+    heavyStaminaCost: 2.5 # goob edit
     wideAnimationRotation: -135
     attackRate: .8
     range: 1.6
     damage:
       types:
-        Blunt: 2.5
+        Blunt: 3.5
     clickPartDamageMultiplier: 3
     heavyPartDamageMultiplier: 2.5
   - type: ItemToggleDamageOtherOnHit
@@ -68,7 +87,7 @@
     color: white
     netsync: false
   - type: Appearance
-  - type: ToggleableLightVisuals
+  - type: ToggleableLightVisuals # Add support for multiple layers
     spriteLayer: blade
     inhandVisuals:
       left:
@@ -77,7 +96,10 @@
       right:
       - state: inhand-right-blade
         shader: unshaded
-  - type: Reflect
+  - type: Reflect # Goob edit
+    reflectProb: .5
+    reflects:
+      - Energy
   - type: IgnitionSource
     temperature: 700
   - type: Scalpel
@@ -94,10 +116,13 @@
   - type: Tag
     tags:
     - NoPaint
+  - type: Tool
+    qualities:
+    - Ignition
 
 - type: entity
   name: energy sword
-  parent: [BaseMeleeWeaponEnergy, BaseSyndicateContraband]
+  parent: BaseMeleeWeaponEnergy
   id: EnergySword
   description: A very loud & dangerous sword with a beam made of pure, concentrated plasma. Cuts through unarmored targets like butter.
   components:
@@ -119,12 +144,73 @@
   id: EnergySwordHoS
   description: An elegant weapon fit for a prince, this otherwise plain silver hilt is engraved with, "My Love".
   components:
-  - type: EnergySword
-    activatedColor: "#00CCFF"
-    colorOptions:
-    - "#00CCFF"
-  - type: StealTarget
-    stealGroup: HoSAntiqueWeapon
+    - type: EnergySword
+      activatedColor: "#00CCFF"
+      colorOptions:
+       - "#00CCFF"
+    - type: StealTarget
+      stealGroup: HoSAntiqueWeapon
+    - type: ItemToggle
+      soundActivate:
+        path: /Audio/Weapons/ebladeon.ogg
+        params:
+          volume: -3
+      soundDeactivate:
+        path: /Audio/Weapons/ebladeoff.ogg
+        params:
+          volume: -3
+    - type: ItemToggleMeleeWeapon
+      activatedSoundOnSwing:
+        path: /Audio/Weapons/eblademiss.ogg
+        params:
+          volume: -3
+          variation: 0.250
+      activatedDamage:
+        types:
+            Slash: 10
+            Heat: 10
+      deactivatedSecret: true
+    - type: ItemToggleActiveSound
+      activeSound:
+        path: /Audio/Weapons/ebladehum.ogg
+        params:
+          volume: -3
+    - type: ComponentToggler
+      components:
+      - type: Sharp
+      - type: DisarmMalus
+        malus: 0.4
+      - type: Execution
+        doAfterDuration: 4.0
+    - type: Sprite
+      sprite: Objects/Weapons/Melee/e_dagger_loud.rsi
+      layers:
+        - state: e_sword
+        - state: e_sword_blade
+          color: "#FFFFFF"
+          visible: false
+          shader: unshaded
+          map: [ "blade" ]
+    - type: MeleeWeapon
+      animationRotation: 135 # WWDP
+      heavyStaminaCost: 1 # goob edit
+      wideAnimationRotation: 145
+      attackRate: 1
+      hidden: true
+      damage:
+        types:
+          Blunt: 1
+    - type: Item
+      size: Tiny
+      sprite: Objects/Weapons/Melee/e_dagger_loud.rsi
+    - type: PointLight
+      enabled: false
+      radius: 1.5
+      energy: 1.5
+      color: white
+      netsync: false
+    - type: Reflect # Goob edit
+      reflectProb: .25
 
 - type: entity
   name: energy dagger
@@ -343,7 +429,7 @@
 
 - type: entity
   name: double-bladed energy sword
-  parent: [BaseMeleeWeaponEnergy, BaseSyndicateContraband]
+  parent: BaseMeleeWeaponEnergy
   id: EnergySwordDouble
   description: Syndicate Command's intern thought that having only one blade on energy swords was not cool enough. This can be stored in pockets.
   components:

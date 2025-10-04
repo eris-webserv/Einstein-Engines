@@ -12,6 +12,13 @@
     walkModifier: 0.8
     sprintModifier: 0.8
   - type: Armor
+    coverage:
+    - Chest
+    - Groin
+    - Arm
+    - Hand
+    - Leg
+    - Foot
     modifiers:
       coefficients:
         Blunt: 0.9
@@ -71,11 +78,19 @@
   - type: FireProtection
     reduction: 0.65 # doesnt have a full seal so not as good
   - type: Armor
+    coverage:
+    - Chest
+    - Groin
+    - Arm
+    - Hand
+    - Leg
+    - Foot
     modifiers:
       coefficients:
-        Slash: 0.9
-        Heat: 0.8
-        Cold: 0.8
+        Slash: 0.7
+        Heat: 0.5
+        Piercing: 0.8
+        Cold: 0.5
   - type: ClothingSpeedModifier
     walkModifier: 0.8
     sprintModifier: 0.7
@@ -94,36 +109,45 @@
   name: atmos fire suit
   description: An expensive firesuit that protects against even the most deadly of station fires. Designed to protect even if the wearer is set aflame.
   components:
-  - type: Sprite
-    sprite: Clothing/OuterClothing/Suits/atmos_firesuit.rsi
-  - type: Clothing
-    sprite: Clothing/OuterClothing/Suits/atmos_firesuit.rsi
-  - type: PressureProtection
-    highPressureMultiplier: 0.02
-    lowPressureMultiplier: 1000
-  - type: TemperatureProtection
-    heatingCoefficient: 0.001
-    coolingCoefficient: 0.05
-  - type: FireProtection
-    reduction: 0.8 # atmos firesuit offers best protection, hardsuits are a little vulnerable
-  - type: Armor
-    modifiers:
-      coefficients:
-        Slash: 0.9
-        Heat: 0.8
-        Cold: 0.8
-  - type: ClothingSpeedModifier
-    walkModifier: 0.8
-    sprintModifier: 0.8
-  - type: HeldSpeedModifier
-  - type: GroupExamine
-  - type: ProtectedFromStepTriggers
-    slots: WITHOUT_POCKET
-  - type: Tag
-    tags:
-    - FullBodyOuter
-    - WhitelistChameleon
-    - HidesHarpyWings
+    - type: Sprite
+      sprite: Clothing/OuterClothing/Suits/atmos_firesuit.rsi
+    - type: Clothing
+      sprite: Clothing/OuterClothing/Suits/atmos_firesuit.rsi
+    - type: PressureProtection
+      highPressureMultiplier: 0.02
+      lowPressureMultiplier: 1000
+    - type: TemperatureProtection
+      heatingCoefficient: 0.001
+      coolingCoefficient: 0.05
+    - type: FireProtection
+      reduction: 0.8 # atmos firesuit offers best protection, hardsuits are a little vulnerable
+    - type: Armor
+      coverage:
+        - Chest
+        - Groin
+        - Arm
+        - Hand
+        - Leg
+        - Foot
+      modifiers:
+        coefficients:
+          Slash: 0.8
+          Heat: 0.4
+          Cold: 0.4
+    - type: ClothingSpeedModifier
+      walkModifier: 0.8
+      sprintModifier: 0.8
+    - type: HeldSpeedModifier
+    - type: GroupExamine
+    #- type: ClothingRequiredStepTriggerImmune
+    #  slots: WITHOUT_POCKET
+    - type: Tag
+      tags:
+        - FullBodyOuter
+        - WhitelistChameleon
+        - HidesHarpyWings
+    - type: ProtectedFromStepTriggers # EE: Doesn't this do the same with ClothingRequiredStepTriggerImmune
+      slots: WITHOUT_POCKET
 
 - type: entity
   parent: [ClothingOuterBaseLarge, GeigerCounterClothing, AllowSuitStorageClothing]
@@ -134,9 +158,16 @@
   - type: Sprite
     sprite: Clothing/OuterClothing/Suits/rad.rsi
   - type: Armor
+    coverage:
+    - Chest
+    - Groin
+    - Arm
+    - Hand
+    - Leg
+    - Foot
     modifiers:
       coefficients:
-        Heat: 0.90
+        Heat: 0.8
         Radiation: 0.001
   - type: Clothing
     sprite: Clothing/OuterClothing/Suits/rad.rsi
@@ -149,6 +180,7 @@
       toggleable-clothing: !type:Container {}
   - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
+  #- type: ProtectedFromStepTriggers
   - type: Tag
     tags:
     - FullBodyOuter
@@ -173,6 +205,13 @@
     heatingCoefficient: 0.01
     coolingCoefficient: 0.01
   - type: Armor
+    coverage:
+    - Chest
+    - Groin
+    - Arm
+    - Hand
+    - Leg
+    - Foot
     modifiers:
       coefficients:
         Blunt: 0.8
@@ -316,6 +355,7 @@
     coolingCoefficient: 0.01
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitCarp
+      #head: ClothingHeadHelmetHardsuitCarp # EE: Rel. Goobstation - Modsuits
 
 - type: entity # From Upstream
   parent: ClothingOuterBase

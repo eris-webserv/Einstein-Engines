@@ -1,4 +1,31 @@
 - type: entity
+  abstract: true
+  parent: BasePartInorganic
+  id: PartSiliconBase
+  components:
+  - type: Sprite
+    sprite: Objects/Specific/Robotics/cyborg_parts.rsi
+  - type: Icon
+    sprite: Objects/Specific/Robotics/cyborg_parts.rsi
+  - type: StaticPrice
+    price: 15 #Goobstation - Increased price
+  - type: BodyPart # Shitmed Change
+    species: Cyborg
+  - type: Tag
+    tags:
+    - Trash
+  - type: PhysicalComposition #Goobstation - Recycle update
+    materialComposition:
+      Steel: 62
+      Glass: 25
+  - type: GuideHelp
+    guides:
+    - Cyborgs
+    - Robotics
+  - type: Damageable # Shitmed
+    damageModifierSet: Silicon
+
+- type: entity
   id: PartSilicon
   parent: BaseItem
   abstract: true
@@ -148,11 +175,9 @@
 
 - type: entity
   id: TorsoBorg
-  parent: PartSilicon
+  parent: [ PartSiliconBase, BaseChestInorganic ]
   name: cyborg torso
   components:
-  - type: BodyPart
-    partType: Torso
   - type: Sprite
     state: borg_chest
   - type: Icon
@@ -162,3 +187,23 @@
     tags:
     - Trash
     - BorgTorso
+    - BorgGenericTorso
+  - type: Item
+    heldPrefix: borg-chest
+  - type: BodyPart
+    children:
+      right arm:
+        id: right arm
+        type: Arm
+      left arm:
+        id: left arm
+        type: Arm
+      head:
+        id: head
+        type: Head
+      right leg:
+        id: right leg
+        type: Leg
+      left leg:
+        id: left leg
+        type: Leg

@@ -14,28 +14,50 @@
       - state: equipped-OUTERCLOTHING-glow
         shader: unshaded
   - type: PressureProtection
-    highPressureMultiplier: 0.45
+    highPressureMultiplier: 0.02
     lowPressureMultiplier: 1000
+  - type: TemperatureProtection
+    heatingCoefficient: 0.01
+    coolingCoefficient: 0.01
   - type: ExplosionResistance
-    damageCoefficient: 0.6
+    damageCoefficient: 0.05
   - type: Armor
+    coverage:
+    - Chest
+    - Groin
+    - Arm
+    - Hand
+    - Leg
+    - Foot
     modifiers:
       coefficients:
-        Blunt: 0.6
-        Slash: 0.5
-        Piercing: 0.5
-        Radiation: 0.5
-        Heat: 0.5
-        Caustic: 0.6
+        Blunt: 0.05
+        Slash: 0.05
+        Piercing: 0.05
+        Heat: 0.05
+        Cold: 0.05
+        Radiation: 0.05
+        Caustic: 0.05
   - type: ClothingSpeedModifier
-    walkModifier: 0.85
-    sprintModifier: 0.85
+    walkModifier: 0.70
+    sprintModifier: 0.70
   - type: HeldSpeedModifier
-  - type: ToggleableClothing
-    clothingPrototype: ClothingHeadHelmetHardsuitBlueshield
+  #- type: StasisProtection # EE: Sounds wizardy
+  #- type: StasisBlinkProvider
+  - type: ToggleableClothing # Goobstation - Modsuits change
+    clothingPrototypes:
+      head: ClothingHeadHelmetHardsuitChronolegioneer
+  - type: ModifyDelayedKnockdown
+    cancel: true
   - type: StaminaDamageResistance
-    coefficient: 0.5 # 50%
+    coefficient: 0
 
+#- type: entity # What the fuck is this thing?
+#  parent: ClothingOuterHardsuitChronolegioneer
+#  id: ClothingOuterHardsuitChronolegioneerUnremoveable
+#  suffix: Unremoveable
+#  components:
+#  - type: Unremoveable
 
 # cybersun stealth
 
@@ -66,6 +88,13 @@
   - type: ExplosionResistance
     damageCoefficient: 0.75
   - type: Armor
+    coverage:
+    - Chest
+    - Groin
+    - Arm
+    - Hand
+    - Leg
+    - Foot
     modifiers:
       coefficients:
         Blunt: 0.85 # Metamaterials are quite brittle

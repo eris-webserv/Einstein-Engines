@@ -38,6 +38,15 @@
         - ItemMask
         restitution: 0.3
         friction: 0.2
+  - type: Armor
+    coverage:
+    - Hand
+    modifiers:
+      coefficients:
+        Heat: 0.9
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
 
 - type: entity
   abstract: true

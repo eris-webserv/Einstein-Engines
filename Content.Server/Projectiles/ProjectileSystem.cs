@@ -1,11 +1,13 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Damage.Systems;
+using Content.Server.Destructible;
 using Content.Server.Effects;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Camera;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
 using Content.Shared.Database;
+using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
@@ -18,6 +20,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly ColorFlashEffectSystem _color = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
+    [Dependency] private readonly DestructibleSystem _destructibleSystem = default!;
     [Dependency] private readonly GunSystem _guns = default!;
     [Dependency] private readonly SharedCameraRecoilSystem _sharedCameraRecoil = default!;
 
@@ -49,7 +52,13 @@ public sealed class ProjectileSystem : SharedProjectileSystem
         RaiseLocalEvent(uid, ref ev);
 
         var otherName = ToPrettyString(target);
-        var modifiedDamage = _damageableSystem.TryChangeDamage(target, ev.Damage, component.IgnoreResistances, origin: component.Shooter);
+        var damageRequired = _destructibleSystem.DestroyedAt(target);
+        if (TryComp<DamageableComponent>(target, out var damageableComponent))
+        {
+            damageRequired -= damageableComponent.TotalDamage;
+            damageRequired = FixedPoint2.Max(damageRequired, FixedPoint2.Zero);
+        }
+        var modifiedDamage = _damageableSystem.TryChangeDamage(target, ev.Damage, component.IgnoreResistances, damageable: damageableComponent, origin: component.Shooter); // Goob edit
         var deleted = Deleted(target);
 
         if (modifiedDamage is not null && EntityManager.EntityExists(component.Shooter))

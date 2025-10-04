@@ -26,6 +26,7 @@
     drawdepth: Mobs
     layers:
       - map: [ "enum.HumanoidVisualLayers.Chest" ]
+      - map: [ "enum.HumanoidVisualLayers.Groin" ]
       - map: [ "enum.HumanoidVisualLayers.Head" ]
       - map: [ "enum.HumanoidVisualLayers.Snout" ]
       - map: [ "enum.HumanoidVisualLayers.Eyes" ]
@@ -91,6 +92,8 @@
   - type: TemperatureProtection
     heatingCoefficient: 0.1
     coolingCoefficient: 0.1
+  #- type: Temperature
+  #  atmosTemperatureTransferEfficiency: 0.01  # Goobstation - fix vulps - end
   - type: Vocal
     sounds:
       Male: MaleVulpkanin

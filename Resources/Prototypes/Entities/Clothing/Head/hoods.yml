@@ -151,9 +151,11 @@
   - type: Clothing
     sprite: Clothing/Head/Hoods/rad.rsi
   - type: Armor
+    coverage:
+    - Head
     modifiers:
       coefficients:
-        Heat: 0.95
+        Heat: 0.7
         Radiation: 0.65
   - type: IdentityBlocker
   - type: BreathMask

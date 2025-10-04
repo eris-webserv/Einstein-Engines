@@ -3,6 +3,19 @@
 # they are unextractable and can't be spawned (no surgery on Animals!?).
 
 - type: entity
+  abstract: true
+  parent: BasePart
+  id: PartAnimalBase
+  components:
+  # yes these sprites dont make sense i dont care its better than them being invisible
+  - type: Sprite
+    sprite: Mobs/Species/Reptilian/parts.rsi
+  - type: Icon
+    sprite: Mobs/Species/Reptilian/parts.rsi
+  - type: StaticPrice
+    price: 50
+
+- type: entity
   id: PartAnimal
   parent: BaseItem
   name: "animal body part"
@@ -76,19 +89,58 @@
     partType: Foot
     slotId: feet # Shitmed
 
+# EE: Only borgs retrain torsos, rest are chest and groin
+# - type: entity
+#   id: TorsoAnimal
+#   name: animal torso
+#   parent: PartAnimal
+#   categories: [ HideSpawnMenu ]
+#   components:
+#   - type: Sprite
+#     layers:
+#     - state: torso_m
+#   - type: BodyPart
+#     partType: Torso
+#   - type: Damageable
+#     damageContainer: Biological
+#   - type: Extractable
+#     juiceSolution:
+#       reagents:
+#       - ReagentId: Fat
+#         Quantity: 10
+#       - ReagentId: Blood
+#         Quantity: 20
+
 - type: entity
-  id: TorsoAnimal
-  name: animal torso
-  parent: PartAnimal
-  categories: [ HideSpawnMenu ]
+  parent: [ PartAnimalBase, BaseChest ]
+  id: ChestAnimal
+  name: animal chest
   components:
   - type: Sprite
     layers:
-    - state: torso_m
+    - state: chest_m
+  - type: Extractable
+    juiceSolution:
+      reagents:
+      - ReagentId: Fat
+        Quantity: 10
+      - ReagentId: Blood
+        Quantity: 20
+
+- type: entity
+  parent: [ PartAnimalBase, BaseGroin ]
+  id: GroinAnimal
+  name: animal groin
+  components:
+  - type: Sprite
+    layers:
+    - state: groin_m
   - type: BodyPart
-    partType: Torso
-  - type: Damageable
-    damageContainer: Biological
+    # standard organs are good for most animals
+    children: # most animals have no hands (primate is unused) so just legs by default
+      legs:
+        id: legs
+        type: Leg
   - type: Extractable
     juiceSolution:
       reagents:
