@@ -36,8 +36,6 @@ public sealed class CEZLevelDamageSystem : EntitySystem
     public float BaseFallingOtherStunTime { get; private set; }
 
     private static readonly ProtoId<DamageTypePrototype> BluntDamageType = "Blunt";
-    private static readonly EntProtoId FallVFX = "CEDustEffect";
-
     public override void Initialize()
     {
         base.Initialize();
@@ -108,9 +106,6 @@ public sealed class CEZLevelDamageSystem : EntitySystem
         var knockdownTime = MathF.Min(args.ImpactPower * args.ImpactPower * BaseFallingStunTime * stunModifier, 5f);
         if (knockdownTime > 0)
             _stun.TryKnockdown(ent.Owner, TimeSpan.FromSeconds(knockdownTime), true);
-
-        if (_net.IsClient && _timing.IsFirstTimePredicted) //Only visuals so client only
-            SpawnAtPosition(FallVFX, Transform(ent).Coordinates);
     }
 }
 
