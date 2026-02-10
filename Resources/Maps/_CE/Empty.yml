@@ -44,8 +44,8 @@ entities:
         immutable: True
         temperature: 293.15
         moles:
-          Oxygen: 21.824879
-          Nitrogen: 82.10312
+        - 21.824879
+        - 82.10312
     - type: DecalGrid
       chunkCollection:
         version: 2
