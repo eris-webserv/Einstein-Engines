@@ -8,6 +8,7 @@ using Content.Shared._CE.ZLevels.Core.EntitySystems;
 using Content.Shared._CE.ZLevels.Flight.Components;
 using Content.Shared.Actions;
 using Content.Shared.Audio;
+using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Gravity;
