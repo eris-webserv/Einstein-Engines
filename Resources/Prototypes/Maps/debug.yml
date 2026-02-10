@@ -56,18 +56,15 @@
   - /Maps/_CE/Empty.yml
   - /Maps/_CE/Empty.yml
   components:
-    - type: MapAtmosphere
-      space: False
-      mixture:
-        volume: 2500
-        immutable: True
-        temperature: 293.15
-        moles:
-          Oxygen: 21.824879
-          Nitrogen: 82.10312
-    - type: LightCycle
-      offset: 490
-      originalColor: "#c8fdff"
+#    - type: MapAtmosphere
+#      space: False
+#      mixture:
+#        volume: 2500
+#        immutable: True
+#        temperature: 293.15
+#        moles:
+#          Oxygen: 21.824879
+#          Nitrogen: 82.10312
     - type: CEZLevelMapRoof
     - type: MapLight
       ambientLightColor: "#c8fdff"
