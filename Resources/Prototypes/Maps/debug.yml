@@ -50,11 +50,8 @@
             ChiefEngineer: [ -1, -1 ]
 
 - type: zMap
-  id: Empty
+  id: EmptyZ
   maps:
-  - /Maps/_CE/Empty.yml
-  - /Maps/_CE/Empty.yml
-  - /Maps/_CE/Empty.yml
   - /Maps/_CE/Empty.yml
   - /Maps/_CE/Empty.yml
   - /Maps/_CE/Empty.yml
@@ -68,14 +65,9 @@
         moles:
           Oxygen: 21.824879
           Nitrogen: 82.10312
-    - type: Parallax
-      parallax: CESky
-    - type: SunShadowCycle
-      offset: 490
     - type: LightCycle
       offset: 490
       originalColor: "#c8fdff"
     - type: CEZLevelMapRoof
-    - type: SunShadow
     - type: MapLight
       ambientLightColor: "#c8fdff"
